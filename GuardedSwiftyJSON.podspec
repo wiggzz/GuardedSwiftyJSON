@@ -8,4 +8,5 @@ Pod::Spec.new do |s|
 
   s.source   = { :git => "https://github.com/wiggzz/GuardedSwiftyJSON.git", :tag => s.version }
   s.source_files = "GuardedSwiftyJSON/*.swift"
+  s.dependency "SwiftyJSON"
 end
