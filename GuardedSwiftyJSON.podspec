@@ -6,6 +6,7 @@ Pod::Spec.new do |s|
   s.license     = { :type => "MIT" }
   s.authors     = { "Will James" => "jameswt@gmail.com" }
 
+  s.ios.deployment_target = "8.0"
   s.source   = { :git => "https://github.com/wiggzz/GuardedSwiftyJSON.git", :tag => s.version }
   s.source_files = "GuardedSwiftyJSON/*.swift"
   s.dependency "SwiftyJSON"
