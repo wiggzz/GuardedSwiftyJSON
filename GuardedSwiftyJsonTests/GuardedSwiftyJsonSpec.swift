@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 import SwiftyJSON
-@testable import GuardedSwiftyJson
+@testable import GuardedSwiftyJSON
 
 struct TestStruct : JsonInitializable {
     let price : Double
