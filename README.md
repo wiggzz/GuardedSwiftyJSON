@@ -68,3 +68,15 @@ struct Model : JsonInitializable {
   }
 }
 ```
+
+## Installation
+
+Carthage:
+
+    github "wiggzz/GuardedSwiftyJSON"
+
+Cocoapods not yet supported.
+
+## Contributing
+
+Pull requests and issues are welcomed.
