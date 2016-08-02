@@ -3,17 +3,17 @@ import SwiftyJSON
 
 public protocol JsonInitializable {
     init?(json: JSON)
-    init(json: JsonProxy)
+    init(json: GuardedJSON)
 }
 
-public protocol JsonProxy {
+public protocol GuardedJSON {
     var json : JSON { get }
 
-    var array : [JsonProxy] { get }
-    var optionalArray : [JsonProxy]? { get }
+    var array : [GuardedJSON] { get }
+    var optionalArray : [GuardedJSON]? { get }
 
-    var dictionary : [String:JsonProxy] { get }
-    var optionalDictionary : [String:JsonProxy]? { get }
+    var dictionary : [String:GuardedJSON] { get }
+    var optionalDictionary : [String:GuardedJSON]? { get }
 
     var string : String { get }
     var optionalString : String? { get }
@@ -60,13 +60,13 @@ public protocol JsonProxy {
     var uInt64: UInt64 { get }
     var optionalUInt64: UInt64? { get }
 
-    subscript (path: [JSONSubscriptType]) -> JsonProxy { get }
-    subscript (path: JSONSubscriptType...) -> JsonProxy { get }
+    subscript (path: [JSONSubscriptType]) -> GuardedJSON { get }
+    subscript (path: JSONSubscriptType...) -> GuardedJSON { get }
 }
 
 extension JsonInitializable {
     public init?(json: JSON) {
-        let context = _JsonProxyContext()
+        let context = GuardedJSONContext()
         self.init(json: context.proxy(json))
         context.close()
         if context.aborted {
@@ -75,13 +75,13 @@ extension JsonInitializable {
     }
 }
 
-private class _JsonProxyContext {
+private class GuardedJSONContext {
     var closed : Bool = false
     var aborted : Bool = false
 
     func abort() {
         if (closed) {
-            FatalErrorWrapper.sharedInstance.fail("ProxyContext being aborted after already being closed. This is probably caused because you are saving a JsonProxy object and accessing it outside an initializer. Do not store JsonProxy as a property, use the .json property to extract the underlying JSON for storage beyond initialization.")
+            FatalErrorWrapper.sharedInstance.fail("GuardedJSONContext being aborted after already being closed, which is unsafe: this indicates a JSON property you expected is not present. This is probably caused because you are saving a GuardedJSON object and accessing it outside an initializer. Do not store GuardedJSON as a property, use the .json property to extract the underlying JSON for storage beyond initialization.")
         }
         aborted = true
     }
@@ -90,8 +90,8 @@ private class _JsonProxyContext {
         closed = true
     }
 
-    func proxy(json: JSON) -> JsonProxy {
-        return _JsonProxy(json: json, context: self)
+    func proxy(json: JSON) -> GuardedJSON {
+        return _GuardedJSON(json: json, context: self)
     }
 }
 
@@ -103,28 +103,28 @@ class FatalErrorWrapper {
     }
 }
 
-private class _JsonProxy : JsonProxy {
+private class _GuardedJSON : GuardedJSON {
     let json: JSON
-    let context : _JsonProxyContext
+    let context : GuardedJSONContext
 
-    init(json: JSON, context : _JsonProxyContext) {
+    init(json: JSON, context : GuardedJSONContext) {
         self.json = json
         self.context = context
     }
 
-    var array : [JsonProxy] {
+    var array : [GuardedJSON] {
         return extractOrAbort(json.array?.map(context.proxy))
     }
 
-    var optionalArray: [JsonProxy]? {
+    var optionalArray: [GuardedJSON]? {
         return json.array?.map(context.proxy)
     }
 
-    var dictionary : [String:JsonProxy] {
+    var dictionary : [String:GuardedJSON] {
         return Dictionary(extractOrAbort(json.dictionary).map { ($0, context.proxy($1)) })
     }
 
-    var optionalDictionary : [String:JsonProxy]? {
+    var optionalDictionary : [String:GuardedJSON]? {
         return (json.dictionary?.map { ($0, context.proxy($1)) }).map { Dictionary($0) }
     }
 
@@ -237,11 +237,11 @@ private class _JsonProxy : JsonProxy {
         return json.uInt64
     }
 
-    subscript (path: [JSONSubscriptType]) -> JsonProxy {
+    subscript (path: [JSONSubscriptType]) -> GuardedJSON {
         return context.proxy(json[path])
     }
 
-    subscript (path: JSONSubscriptType...) -> JsonProxy {
+    subscript (path: JSONSubscriptType...) -> GuardedJSON {
         return context.proxy(json[path])
     }
 

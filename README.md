@@ -37,7 +37,7 @@ struct Model : JsonInitializable {
   let name : String
   let height : Double
 
-  init(json: JsonProxy) {
+  init(json: GuardedJSON) {
     name = json["name"].string
     height = json["height"].double
   }
@@ -62,13 +62,22 @@ struct Model : JsonInitializable {
   let name : String
   let height : Double?
 
-  init(json: JsonProxy) {
+  init(json: GuardedJSON) {
     name = json["name"].string
     height = json["height"].optionalDouble
   }
 }
 ```
 Then, if those optional properties do not exist, they will not cause initialization to abort.
+
+GuardedSwiftyJSON provies the following protocol
+```swift
+protocol JsonInitializable {
+  init?(json: JSON)
+  init(json: GuardedJSON)
+}
+```
+and a default implementation of `init?(json: JSON)` which automatically calls the proxying initializer and then fails the initialization if any of the required JSON properties are not present.
 
 ## Installation
 

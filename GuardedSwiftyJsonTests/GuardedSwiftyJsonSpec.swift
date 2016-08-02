@@ -7,7 +7,7 @@ struct TestStruct : JsonInitializable {
     let price : Double
     let name : String
 
-    init(json: JsonProxy) {
+    init(json: GuardedJSON) {
         price = json["price"].double
         name = json["name"].string
     }
@@ -16,7 +16,7 @@ struct TestStruct : JsonInitializable {
 struct DeepStruct : JsonInitializable {
     let deepItem : String
 
-    init(json: JsonProxy) {
+    init(json: GuardedJSON) {
         deepItem = json["level1"]["level2"].string
     }
 }
@@ -24,15 +24,15 @@ struct DeepStruct : JsonInitializable {
 struct DeferredStruct : JsonInitializable {
     let object : JSON
 
-    init(json: JsonProxy) {
+    init(json: GuardedJSON) {
         object = json["object"].json
     }
 }
 
 struct DangerousStruct : JsonInitializable {
-    let address: JsonProxy
+    let address: GuardedJSON
 
-    init(json: JsonProxy) {
+    init(json: GuardedJSON) {
         address = json["address"]
     }
 }
@@ -94,7 +94,7 @@ class GuardedSwiftyJsonSpec : QuickSpec {
                 expect(object?.deepItem).to(equal("test string"))
             }
 
-            it("should protect against dangerous usage of JsonProxy outside initializer") {
+            it("should protect against dangerous usage of GuardedJSON outside initializer") {
                 let fatalErrorStub = FatalErrorStub()
                 FatalErrorWrapper.sharedInstance = fatalErrorStub
 
@@ -105,7 +105,7 @@ class GuardedSwiftyJsonSpec : QuickSpec {
 
                 let _ = object!.address["streetName"].string
 
-                expect(fatalErrorStub.message).to(equal("ProxyContext being aborted after already being closed. This is probably caused because you are saving a JsonProxy object and accessing it outside an initializer. Do not store JsonProxy as a property, use the .json property to extract the underlying JSON for storage beyond initialization."))
+                expect(fatalErrorStub.message).to(equal("GuardedJSONContext being aborted after already being closed, which is unsafe: this indicates a JSON property you expected is not present. This is probably caused because you are saving a GuardedJSON object and accessing it outside an initializer. Do not store GuardedJSON as a property, use the .json property to extract the underlying JSON for storage beyond initialization."))
 
                 FatalErrorWrapper.sharedInstance = FatalErrorWrapper()
             }

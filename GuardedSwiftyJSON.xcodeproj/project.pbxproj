@@ -12,7 +12,7 @@
 		55FE27211D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE27161D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework */; };
 		55FE27311D4ADF98008C5C67 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 55FE27301D4ADF98008C5C67 /* Cartfile */; };
 		55FE27331D4AE0A2008C5C67 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE27321D4AE0A2008C5C67 /* SwiftyJSON.framework */; };
-		55FE27371D4AE32F008C5C67 /* JsonInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE27361D4AE32F008C5C67 /* JsonInitializable.swift */; };
+		55FE27371D4AE32F008C5C67 /* GuardedSwiftyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FE27361D4AE32F008C5C67 /* GuardedSwiftyJson.swift */; };
 		55FE27391D4AED3A008C5C67 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE27321D4AE0A2008C5C67 /* SwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		55FE27271D4ADF5B008C5C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55FE27301D4ADF98008C5C67 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		55FE27321D4AE0A2008C5C67 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		55FE27361D4AE32F008C5C67 /* JsonInitializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonInitializable.swift; sourceTree = "<group>"; };
+		55FE27361D4AE32F008C5C67 /* GuardedSwiftyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardedSwiftyJson.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 			children = (
 				55FE27191D4ADF5B008C5C67 /* GuardedSwiftyJson.h */,
 				55FE271B1D4ADF5B008C5C67 /* Info.plist */,
-				55FE27361D4AE32F008C5C67 /* JsonInitializable.swift */,
+				55FE27361D4AE32F008C5C67 /* GuardedSwiftyJson.swift */,
 			);
 			path = GuardedSwiftyJson;
 			sourceTree = "<group>";
@@ -250,7 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55FE27371D4AE32F008C5C67 /* JsonInitializable.swift in Sources */,
+				55FE27371D4AE32F008C5C67 /* GuardedSwiftyJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
