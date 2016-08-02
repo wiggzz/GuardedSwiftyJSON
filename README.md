@@ -68,14 +68,17 @@ struct Model : JsonInitializable {
   }
 }
 ```
+Then, if those optional properties do not exist, they will not cause initialization to abort.
 
 ## Installation
 
-Carthage:
+### Carthage
 
     github "wiggzz/GuardedSwiftyJSON"
 
-Cocoapods not yet supported.
+### Cocoapods
+
+    pod 'GuardedSwiftyJSON'
 
 ## Contributing
 
