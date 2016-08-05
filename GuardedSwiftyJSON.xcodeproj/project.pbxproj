@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5525A9821D54289500AD483A /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55FE27321D4AE0A2008C5C67 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5525A9851D54460000AD483A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5525A9831D54460000AD483A /* Nimble.framework */; };
+		5525A9861D54460000AD483A /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5525A9841D54460000AD483A /* Quick.framework */; };
+		5525A9871D54461F00AD483A /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5525A9831D54460000AD483A /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5525A9881D54461F00AD483A /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5525A9841D54460000AD483A /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		554737051D4B22A0002271C2 /* GuardedSwiftyJsonSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554737041D4B22A0002271C2 /* GuardedSwiftyJsonSpec.swift */; };
 		55FE271A1D4ADF5B008C5C67 /* GuardedSwiftyJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FE27191D4ADF5B008C5C67 /* GuardedSwiftyJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FE27211D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE27161D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework */; };
@@ -34,6 +38,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5525A9871D54461F00AD483A /* Nimble.framework in CopyFiles */,
+				5525A9881D54461F00AD483A /* Quick.framework in CopyFiles */,
 				5525A9821D54289500AD483A /* SwiftyJSON.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,6 +47,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5525A9831D54460000AD483A /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		5525A9841D54460000AD483A /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		554737011D4B227A002271C2 /* GuardedSwiftyJsonTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GuardedSwiftyJsonTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		554737041D4B22A0002271C2 /* GuardedSwiftyJsonSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardedSwiftyJsonSpec.swift; sourceTree = "<group>"; };
 		55FE27161D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GuardedSwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5525A9851D54460000AD483A /* Nimble.framework in Frameworks */,
+				5525A9861D54460000AD483A /* Quick.framework in Frameworks */,
 				55FE27211D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework in Frameworks */,
 				55FE27391D4AED3A008C5C67 /* SwiftyJSON.framework in Frameworks */,
 			);
@@ -117,6 +127,8 @@
 		55FE27351D4AE0D3008C5C67 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				5525A9831D54460000AD483A /* Nimble.framework */,
+				5525A9841D54460000AD483A /* Quick.framework */,
 				55FE27321D4AE0A2008C5C67 /* SwiftyJSON.framework */,
 			);
 			name = Dependencies;
