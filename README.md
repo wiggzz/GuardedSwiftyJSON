@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wiggzz/GuardedSwiftyJSON.svg?branch=master)](https://travis-ci.org/wiggzz/GuardedSwiftyJSON)
+
 # GuardedSwiftyJSON
 
 ## Why should I use this?

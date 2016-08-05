@@ -6,5 +6,5 @@ before_install:
   - brew update
   - brew outdated carthage || brew update carthage
 before_script:
-  - carthage bootstrap
+  - carthage bootstrap --platform iOS
 script: xcodebuild -scheme "GuardedSwiftyJson" -destination "platform=iOS Simulator,name=iPhone 6" test
