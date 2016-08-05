@@ -2,6 +2,10 @@ language: objective-c
 
 osx_image: xcode7.3
 xcode_sdk: iphonesimulator9.3
-
 xcode_project: GuardedSwiftyJSON.xcodeproj
 xcode_scheme: GuardedSwiftyJson
+before_install:
+  - brew update
+  - brew outdated carthage || brew update carthage
+before_script:
+  - carthage bootstrap

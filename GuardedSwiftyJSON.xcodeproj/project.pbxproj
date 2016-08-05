@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5525A9821D54289500AD483A /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55FE27321D4AE0A2008C5C67 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		554737051D4B22A0002271C2 /* GuardedSwiftyJsonSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554737041D4B22A0002271C2 /* GuardedSwiftyJsonSpec.swift */; };
 		55FE271A1D4ADF5B008C5C67 /* GuardedSwiftyJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 55FE27191D4ADF5B008C5C67 /* GuardedSwiftyJson.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55FE27211D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FE27161D4ADF5B008C5C67 /* GuardedSwiftyJSON.framework */; };
@@ -25,6 +26,19 @@
 			remoteInfo = GuardedSwiftyJson;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5525A9811D54288400AD483A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5525A9821D54289500AD483A /* SwiftyJSON.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		554737011D4B227A002271C2 /* GuardedSwiftyJsonTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GuardedSwiftyJsonTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -148,6 +162,7 @@
 				55FE271C1D4ADF5B008C5C67 /* Sources */,
 				55FE271D1D4ADF5B008C5C67 /* Frameworks */,
 				55FE271E1D4ADF5B008C5C67 /* Resources */,
+				5525A9811D54288400AD483A /* CopyFiles */,
 				55FE273A1D4B050B008C5C67 /* ShellScript */,
 			);
 			buildRules = (
