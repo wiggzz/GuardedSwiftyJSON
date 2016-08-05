@@ -79,6 +79,49 @@ protocol JsonInitializable {
 ```
 and a default implementation of `init?(json: JSON)` which automatically calls the proxying initializer and then fails the initialization if any of the required JSON properties are not present.
 
+## Nested objects
+
+Often you will have nested JSON objects that you will want to represent as a separate model. The default behavior is for the outer initializer to fail if a nested object is not valid. For example:
+```swift
+struct Outer : JsonInitializable {
+  let inner : Inner
+
+  init(json: GuardedJSON) {
+    // since the inner json is still a GuardedJSON object in the same context,
+    // if any of the properties trying to be extracted are invalid, the outer
+    // initialization process will fail.
+    inner = Inner(json: json["inner"])
+  }
+}
+```
+If we want an inner object to be optional, we should use the failable initializer of the Inner object:
+```swift
+struct Outer : JsonInitializable {
+  let inner : Inner?
+
+  init(json: GuardedJSON) {
+    // here we extract the raw json object and call the failable initializer
+    inner = Inner(json: json["inner"].rawJson)
+  }
+}
+```
+
+The same approach can be used to flatten a nested array of objects, where we only want to drop the ones that cannot be deserialized:
+```swift
+struct Outer : JsonInitializable {
+  let items: [Inner]
+
+  init(json: GuardedJSON) {
+    inner = json["inner"].array.flatMap {
+      return Inner(json: $0.rawJson)
+    }
+  }
+}
+```
+To be specific, the `Outer` initializer will fail if the `inner` key is not present or is not an array. Otherwise the `Outer` initializer will succeed, and the array will be filled with any valid elements from the JSON.
+
+In this way you can control where you want initialization to fail.
+
 ## Installation
 
 ### Carthage

@@ -7,7 +7,7 @@ public protocol JsonInitializable {
 }
 
 public protocol GuardedJSON {
-    var json : JSON { get }
+    var rawJson : JSON { get }
 
     var array : [GuardedJSON] { get }
     var optionalArray : [GuardedJSON]? { get }
@@ -104,145 +104,145 @@ class FatalErrorWrapper {
 }
 
 private class _GuardedJSON : GuardedJSON {
-    let json: JSON
+    let rawJson: JSON
     let context : GuardedJSONContext
 
     init(json: JSON, context : GuardedJSONContext) {
-        self.json = json
+        self.rawJson = json
         self.context = context
     }
 
     var array : [GuardedJSON] {
-        return extractOrAbort(json.array?.map(context.proxy))
+        return extractOrAbort(rawJson.array?.map(context.proxy))
     }
 
     var optionalArray: [GuardedJSON]? {
-        return json.array?.map(context.proxy)
+        return rawJson.array?.map(context.proxy)
     }
 
     var dictionary : [String:GuardedJSON] {
-        return Dictionary(extractOrAbort(json.dictionary).map { ($0, context.proxy($1)) })
+        return Dictionary(extractOrAbort(rawJson.dictionary).map { ($0, context.proxy($1)) })
     }
 
     var optionalDictionary : [String:GuardedJSON]? {
-        return (json.dictionary?.map { ($0, context.proxy($1)) }).map { Dictionary($0) }
+        return (rawJson.dictionary?.map { ($0, context.proxy($1)) }).map { Dictionary($0) }
     }
 
     var string : String {
-        return extractOrAbort(json.string)
+        return extractOrAbort(rawJson.string)
     }
 
     var optionalString : String? {
-        return json.string
+        return rawJson.string
     }
 
     var double : Double {
-        return extractOrAbort(json.double)
+        return extractOrAbort(rawJson.double)
     }
 
     var optionalDouble : Double? {
-        return json.double
+        return rawJson.double
     }
 
     var bool : Bool {
-        return extractOrAbort(json.bool)
+        return extractOrAbort(rawJson.bool)
     }
 
     var optionalBool : Bool? {
-        return json.bool
+        return rawJson.bool
     }
 
     var number : NSNumber {
-        return extractOrAbort(json.number)
+        return extractOrAbort(rawJson.number)
     }
 
     var optionalNumber: NSNumber? {
-        return json.number
+        return rawJson.number
     }
 
     var float: Float {
-        return extractOrAbort(json.float)
+        return extractOrAbort(rawJson.float)
     }
     var optionalFloat : Float? {
-        return json.float
+        return rawJson.float
     }
 
     var int: Int {
-        return extractOrAbort(json.int)
+        return extractOrAbort(rawJson.int)
     }
     var optionalInt: Int? {
-        return json.int
+        return rawJson.int
     }
 
     var uInt: UInt {
-        return extractOrAbort(json.uInt)
+        return extractOrAbort(rawJson.uInt)
     }
     var optionalUInt: UInt? {
-        return json.uInt
+        return rawJson.uInt
     }
 
     var int8: Int8 {
-        return extractOrAbort(json.int8)
+        return extractOrAbort(rawJson.int8)
     }
     var optionalInt8: Int8? {
-        return json.int8
+        return rawJson.int8
     }
 
     var uInt8: UInt8 {
-        return extractOrAbort(json.uInt8)
+        return extractOrAbort(rawJson.uInt8)
     }
     var optionalUInt8: UInt8? {
-        return json.uInt8
+        return rawJson.uInt8
     }
 
     var int16: Int16 {
-        return extractOrAbort(json.int16)
+        return extractOrAbort(rawJson.int16)
     }
     var optionalInt16: Int16? {
-        return json.int16
+        return rawJson.int16
     }
 
     var uInt16: UInt16 {
-        return extractOrAbort(json.uInt16)
+        return extractOrAbort(rawJson.uInt16)
     }
     var optionalUInt16: UInt16? {
-        return json.uInt16
+        return rawJson.uInt16
     }
 
     var int32: Int32 {
-        return extractOrAbort(json.int32)
+        return extractOrAbort(rawJson.int32)
     }
     var optionalInt32: Int32? {
-        return json.int32
+        return rawJson.int32
     }
 
     var uInt32: UInt32 {
-        return extractOrAbort(json.uInt32)
+        return extractOrAbort(rawJson.uInt32)
     }
     var optionalUInt32: UInt32? {
-        return json.uInt32
+        return rawJson.uInt32
     }
 
     var int64: Int64 {
-        return extractOrAbort(json.int64)
+        return extractOrAbort(rawJson.int64)
     }
     var optionalInt64: Int64? {
-        return json.int64
+        return rawJson.int64
     }
 
     var uInt64: UInt64 {
-        return extractOrAbort(json.uInt64)
+        return extractOrAbort(rawJson.uInt64)
     }
     var optionalUInt64: UInt64? {
-        return json.uInt64
+        return rawJson.uInt64
     }
 
     subscript (path: [JSONSubscriptType]) -> GuardedJSON {
-        return context.proxy(json[path])
+        return context.proxy(rawJson[path])
     }
 
     subscript (path: JSONSubscriptType...) -> GuardedJSON {
-        return context.proxy(json[path])
+        return context.proxy(rawJson[path])
     }
 
     private func extractOrAbort<T : DefaultInitializable>(value: T?) -> T {
@@ -285,4 +285,3 @@ extension Int32 : DefaultInitializable {}
 extension UInt32 : DefaultInitializable {}
 extension Int64 : DefaultInitializable {}
 extension UInt64 : DefaultInitializable {}
-

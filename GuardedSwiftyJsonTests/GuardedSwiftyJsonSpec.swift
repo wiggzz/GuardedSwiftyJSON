@@ -25,7 +25,7 @@ struct DeferredStruct : JsonInitializable {
     let object : JSON
 
     init(json: GuardedJSON) {
-        object = json["object"].json
+        object = json["object"].rawJson
     }
 }
 
@@ -34,6 +34,26 @@ struct DangerousStruct : JsonInitializable {
 
     init(json: GuardedJSON) {
         address = json["address"]
+    }
+}
+
+struct NestedStruct : JsonInitializable {
+    let items: [TestStruct]
+
+    init(json: GuardedJSON) {
+        items = json["items"].array.map {
+            return TestStruct(json: $0)
+        }
+    }
+}
+
+struct NestedStructFlattened : JsonInitializable {
+    let items : [TestStruct]
+
+    init(json: GuardedJSON) {
+        items = json["items"].array.flatMap {
+            return TestStruct(json: $0.rawJson)
+        }
     }
 }
 
@@ -92,6 +112,69 @@ class GuardedSwiftyJsonSpec : QuickSpec {
                 let object = DeepStruct(json: json)
 
                 expect(object?.deepItem).to(equal("test string"))
+            }
+
+            it("should be able to perform nested initialization") {
+                let json = JSON([
+                    "items": [
+                        [
+                            "name": "shovel",
+                            "price": 4.5
+                        ],
+                        [
+                            "name": "bucket",
+                            "price": 2.0
+                        ]
+                    ]
+                    ])
+
+                let object = NestedStruct(json: json)
+
+                expect(object).toNot(beNil())
+                expect(object?.items.count).to(equal(2))
+                expect(object?.items[0].name).to(equal("shovel"))
+                expect(object?.items[0].price).to(equal(4.5))
+                expect(object?.items[1].name).to(equal("bucket"))
+                expect(object?.items[1].price).to(equal(2.0))
+            }
+
+            it("should fail the initialization when nested objects are invalid") {
+                let json = JSON([
+                        "items": [
+                            [
+                                "name": "shovel",
+                                "price": 4.5
+                            ],
+                            [
+                                "name": "bucket"
+                            ]
+                        ]
+                    ])
+
+                let object = NestedStruct(json: json)
+
+                expect(object).to(beNil())
+            }
+
+            it("should not fail the initialization when nested items are flattened") {
+                let json = JSON([
+                    "items": [
+                        [
+                            "name": "shovel",
+                            "price": 4.5
+                        ],
+                        [
+                            "name": "bucket"
+                        ]
+                    ]
+                    ])
+
+                let object = NestedStructFlattened(json: json)
+
+                expect(object).toNot(beNil())
+                expect(object?.items.count).to(equal(1))
+                expect(object?.items[0].name).to(equal("shovel"))
+                expect(object?.items[0].price).to(equal(4.5))
             }
 
             it("should protect against dangerous usage of GuardedJSON outside initializer") {
