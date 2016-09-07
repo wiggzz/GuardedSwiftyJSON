@@ -72,7 +72,7 @@ struct Model : JsonInitializable {
 ```
 Then, if those optional properties do not exist, they will not cause initialization to abort.
 
-GuardedSwiftyJSON provies the following protocol
+GuardedSwiftyJSON provides the following protocol
 ```swift
 protocol JsonInitializable {
   init?(json: JSON)
