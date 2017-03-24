@@ -60,7 +60,7 @@ struct NestedStructFlattened : JsonInitializable {
 class FatalErrorStub : FatalErrorWrapper {
     var message : String?
 
-    override func fail(message: String) {
+    override func fail(_ message: String) {
         self.message = message
     }
 }
