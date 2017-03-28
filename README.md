@@ -137,3 +137,7 @@ In this way you can control where you want initialization to fail.
 ## Contributing
 
 Pull requests and issues are welcomed.
+
+To run the tests, you first need to install the dependencies using `Carthage`.
+
+    carthage update

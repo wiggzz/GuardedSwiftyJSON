@@ -90,7 +90,7 @@ private class GuardedJSONContext {
         closed = true
     }
 
-    func proxy(json: JSON) -> GuardedJSON {
+    func proxy(_ json: JSON) -> GuardedJSON {
         return _GuardedJSON(json: json, context: self)
     }
 }
@@ -98,7 +98,7 @@ private class GuardedJSONContext {
 class FatalErrorWrapper {
     static var sharedInstance = FatalErrorWrapper()
 
-    func fail(message: String) {
+    func fail(_ message: String) {
         fatalError(message)
     }
 }
@@ -245,7 +245,7 @@ private class _GuardedJSON : GuardedJSON {
         return context.proxy(rawJson[path])
     }
 
-    private func extractOrAbort<T : DefaultInitializable>(value: T?) -> T {
+    fileprivate func extractOrAbort<T : DefaultInitializable>(_ value: T?) -> T {
         if let value = value {
             return value
         } else {
