@@ -7,4 +7,4 @@ before_install:
   - brew outdated carthage || brew upgrade carthage
 before_script:
   - carthage bootstrap --platform iOS
-script: xcodebuild -scheme "GuardedSwiftyJson" -destination "platform=iOS Simulator,name=iPhone 7" test
+script: xcodebuild -scheme "GuardedSwiftyJson" -destination "platform=iOS Simulator,id=22FA2149-1241-469C-BF6D-462D3837DB72" test
